@@ -50,7 +50,7 @@ class ArticleController extends Controller
         // Handle uploaded image
         if ($request->hasFile('image')) {
             $imagePath = $this->uploadService->handleUploadedFile($request->file('image'), 'images/articles');
-            
+
             $validated['image'] = $imagePath;
         }
 
