@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Article;
 use App\Http\Requests\StoreArticleRequest;
 use App\Http\Requests\UpdateArticleRequest;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Session;
 
 class ArticleController extends Controller
@@ -20,6 +21,8 @@ class ArticleController extends Controller
      */
     public function index()
     {
+        Gate::authorize('viewAny', Article::class);
+
         $articles = $this->article->paginate(10);
 
         return view('articles.index', compact('articles'));

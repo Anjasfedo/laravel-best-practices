@@ -13,7 +13,7 @@ class ArticlePolicy
      */
     public function viewAny(User $user): bool
     {
-        //
+        return $user->id === 2;
     }
 
     /**
