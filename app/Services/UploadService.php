@@ -22,4 +22,20 @@ class UploadService
         // Return the relative path to the stored file
         return $storedPath;
     }
+
+    public function handleUpdatedFile(?UploadedFile $file, $currentPath, $directory = 'temp', $disk = 'public'): ?string
+    {
+        // Delete the current file if it exists
+        $this->deleteFile($currentPath, $disk);
+
+        // Upload the new file
+        return $this->handleUploadedFile($file, $directory, $disk);
+    }
+
+    public function deleteFile($path, $disk = 'public')
+    {
+        if ($path) {
+            Storage::disk($disk)->delete($path);
+        }
+    }
 }

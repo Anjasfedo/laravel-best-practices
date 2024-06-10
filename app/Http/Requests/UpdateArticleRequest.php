@@ -30,6 +30,7 @@ class UpdateArticleRequest extends FormRequest
             'title' => 'required|max:255',
             'description' => 'sometimes|max:255',
             'body' => 'sometimes',
+            'image' => 'sometimes|image|mimes:jpeg,png,jpg,gif|max:2048',
         ];
     }
 }

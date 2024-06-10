@@ -86,7 +86,24 @@ class ArticleController extends Controller
     {
         $validated = $request->validated();
 
-        dd($validated);
+        // Handle updated image
+        if ($request->hasFile('image')) {
+            $imagePath = $this->uploadService->handleUpdatedFile(
+                $request->file('image'),
+                $article->image, // Current image path in database
+                'images/articles', // Directory to store images
+                'public' // Disk to store images
+            );
+            $validated['image'] = $imagePath;
+        }
+
+        // Update the article with validated data
+        $article->update($validated);
+
+        // Flash a success message if the article was successfully updated
+        Session::flash('success', 'Article updated successfully.');
+
+        return redirect()->route('articles.index');
     }
 
     /**
@@ -94,6 +111,15 @@ class ArticleController extends Controller
      */
     public function destroy(Article $article)
     {
-        //
+        // Delete associated image file
+        $this->uploadService->deleteFile($article->image, 'public');
+
+        // Delete the article
+        $article->delete();
+
+        // Flash a success message if the article was successfully deleted
+        Session::flash('success', 'Article deleted successfully.');
+
+        return redirect()->route('articles.index');
     }
 }
