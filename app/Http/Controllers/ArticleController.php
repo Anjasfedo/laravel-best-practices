@@ -5,16 +5,20 @@ namespace App\Http\Controllers;
 use App\Models\Article;
 use App\Http\Requests\StoreArticleRequest;
 use App\Http\Requests\UpdateArticleRequest;
+use App\Services\UploadService;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Session;
 
 class ArticleController extends Controller
 {
     protected $article;
+    protected $uploadService; // Add UploadService
 
-    public function __construct(Article $article)
+    public function __construct(Article $article, UploadService $uploadService)
     {
         $this->article = $article;
+        $this->uploadService = $uploadService;
     }
     /**
      * Display a listing of the resource.
@@ -23,7 +27,7 @@ class ArticleController extends Controller
     {
         Gate::authorize('viewAny', Article::class);
 
-        $articles = $this->article->paginate(10);
+        $articles = $this->article->all();
 
         return view('articles.index', compact('articles'));
     }
@@ -43,9 +47,15 @@ class ArticleController extends Controller
     {
         $validated = $request->validated();
 
-        // If validation succeeds, continue with your logic
-        // For example, saving the article to the database
-        // $article = Article::create($validatedData);
+        // Handle uploaded image
+        if ($request->hasFile('image')) {
+            $imagePath = $this->uploadService->handleUploadedFile($request->file('image'), 'images/articles');
+            
+            $validated['image'] = $imagePath;
+        }
+
+        // Example: Save the article to the database
+        $article = Auth::user()->articles()->create($validated);
 
         // Flash a success message if the article was successfully saved
         Session::flash('success', 'Article created successfully.');

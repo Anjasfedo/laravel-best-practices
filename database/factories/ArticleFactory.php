@@ -20,9 +20,8 @@ class ArticleFactory extends Factory
         return [
             'user_id' => User::factory(), // Create a user_id using User factory
             'title' => $this->faker->sentence,
-            'slug' => $this->faker->slug,
             'description' => $this->faker->sentence,
-            'body' => $this->faker->paragraphs(3, true),
+            'body' => $this->faker->paragraphs(1, true),
             'created_at' => $this->faker->dateTimeBetween('-1 year', 'now'),
             'updated_at' => $this->faker->dateTimeBetween('-1 year', 'now'),
         ];
