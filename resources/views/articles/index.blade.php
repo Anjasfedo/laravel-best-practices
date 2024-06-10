@@ -54,6 +54,13 @@
                                         <x-primary-button> <a href="{{ route('articles.edit', $article->id) }}">
                                                 Edit
                                             </a></x-primary-button>
+                                        <form action="{{ route('articles.destroy', $article->id) }}" method="POST"
+                                            class="delete-alertbox">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit">Delete</button>
+                                        </form>
+
                                     </td>
                                 </tr>
                             @endforeach

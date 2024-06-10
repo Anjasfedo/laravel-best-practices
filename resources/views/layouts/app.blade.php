@@ -59,7 +59,35 @@
             });
         </script>
     @endif
+    <script>
+        window.addEventListener("DOMContentLoaded", () => {
+            document.addEventListener("submit", (event) => {
+                // Check if the submitted form contains the delete-alertbox class
+                if (event.target && event.target.classList.contains("delete-alertbox")) {
+                    event.preventDefault(); // Prevent the default form submission behavior
+                    const form = event.target;
 
+                    // Display a confirmation dialog using SweetAlert
+                    Swal.fire({
+                            title: "Are you sure?",
+                            text: "You won't be able to revert this!",
+                            icon: "warning",
+                            showCancelButton: true,
+                            cancelButtonColor: "#3085d6",
+                            confirmButtonColor: "#d33",
+                            confirmButtonText: "Yes, delete it!",
+                        })
+                        .then((result) => {
+                            if (result.isConfirmed) {
+                                form.submit(); // Submit the form if the user confirms
+                            }
+                        })
+                        .catch(() => event
+                    .preventDefault()); // Prevent form submission if there is an error
+                }
+            });
+        });
+    </script>
 </body>
 
 </html>
