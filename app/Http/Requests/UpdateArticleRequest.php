@@ -27,7 +27,7 @@ class UpdateArticleRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'title' => 'sometimes|max:255',
+            'title' => 'required|max:255',
             'description' => 'sometimes|max:255',
             'body' => 'sometimes',
         ];

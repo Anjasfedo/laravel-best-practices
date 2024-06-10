@@ -10,11 +10,8 @@
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900 dark:text-gray-100">
                     <x-form method="POST" action="{{ route('articles.store') }}">
-                        @csrf
-
+                        
                         <x-form-input name="title" label="Title" type="text" />
-
-                        <x-form-input name="slug" label="Slug" type="text" />
 
                         <x-form-input name="description" label="Description" type="text" />
 

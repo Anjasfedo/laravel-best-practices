@@ -4,6 +4,10 @@
         @csrf
     @endunless
 
+    @if($method != '')
+        @method($method)
+    @endif
+
     {!! $slot !!}
 
 </form>
