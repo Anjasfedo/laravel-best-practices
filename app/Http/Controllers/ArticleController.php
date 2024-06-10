@@ -8,12 +8,20 @@ use App\Http\Requests\UpdateArticleRequest;
 
 class ArticleController extends Controller
 {
+    protected $article;
+
+    public function __construct(Article $article)
+    {
+        $this->article = $article;
+    }
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        //
+        $articles = $this->article->paginate(10);
+
+        return view('articles.index', compact('articles'));
     }
 
     /**
