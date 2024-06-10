@@ -64,3 +64,16 @@ If you discover a security vulnerability within Laravel, please send an e-mail t
 ## License
 
 The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+
+# Some practices
+
+1. Use `' '` for string
+
+2. Make CRUD view
+`php artisan make:view [plural].index`
+`php artisan make:view [plural].create`
+`php artisan make:view [plural].show`
+`php artisan make:view [plural].update`
+
+3. Make model with all (migration, seeder, factory, policy, resource controller, form request)
+`php artisan make:model [singular] -a`
