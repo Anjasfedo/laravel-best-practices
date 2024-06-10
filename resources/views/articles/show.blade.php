@@ -14,23 +14,23 @@
                         <p class="text-sm text-gray-500 dark:text-gray-400">{{ $article->description }}</p>
                     </div>
 
-                    <div class="mt-4">
-                        @if ($article->image)
-                            <img src="{{ asset($article->image) }}" alt="Article Image" class="h-64 w-auto object-cover">
-                        @else
-                            <span class="text-gray-400">No image uploaded</span>
-                        @endif
-                    </div>
+                    <x-show-file :fileUrl="$article->image_url" :label="'Article Image'" />
 
                     <div class="mt-4">
                         <p class="text-base text-gray-700 dark:text-gray-300">{{ $article->body }}</p>
                     </div>
 
                     <div class="mt-4">
-                        <a href="{{ route('articles.edit', $article->id) }}" class="text-blue-500 dark:text-blue-400 hover:underline">Edit</a>
+                        <a href="{{ route('articles.edit', $article->id) }}"
+                            class="text-blue-500 dark:text-blue-400 hover:underline">Edit</a>
                     </div>
                 </div>
             </div>
         </div>
+        {{-- <input id="article" type="hidden" value='@json($article->id)'>
+        <script>
+            let article = $('#article').val();
+            console.log(article);
+        </script> --}}
     </div>
 </x-app-layout>
