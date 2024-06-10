@@ -19,19 +19,24 @@
                     <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
                         <thead class="bg-gray-50 dark:bg-gray-800">
                             <tr>
-                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase">
+                                <th
+                                    class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase">
                                     Title
                                 </th>
-                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase">
+                                <th
+                                    class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase">
                                     Description
                                 </th>
-                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase">
+                                <th
+                                    class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase">
                                     Body
                                 </th>
-                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase">
+                                <th
+                                    class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase">
                                     Image
                                 </th>
-                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase">
+                                <th
+                                    class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase">
                                     Actions
                                 </th>
                             </tr>
@@ -39,7 +44,8 @@
                         <tbody class="divide-y divide-gray-200 dark:divide-gray-700">
                             @foreach ($articles as $article)
                                 <tr>
-                                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 dark:text-gray-100">
+                                    <td
+                                        class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 dark:text-gray-100">
                                         {{ $article->title }}
                                     </td>
                                     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-400">
@@ -50,17 +56,19 @@
                                     </td>
                                     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-400">
                                         @if ($article->image_url)
-                                            <img src="{{ $article->image_url }}" alt="Article Image" class="h-12 w-auto">
+                                            <img src="{{ $article->image_url }}" alt="Article Image"
+                                                class="h-12 w-auto">
                                         @else
                                             No Image
                                         @endif
                                     </td>
                                     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-400">
-                                        <x-primary-button>
-                                            <a href="{{ route('articles.edit', $article->id) }}">
-                                                Edit
-                                            </a>
-                                        </x-primary-button>
+                                        <x-nav-link :href="route('articles.edit', $article->id)">
+                                            Edit
+                                        </x-nav-link>
+                                        <x-nav-link :href="route('articles.show', $article->id)">
+                                            Show
+                                        </x-nav-link>
                                         <form action="{{ route('articles.destroy', $article->id) }}" method="POST"
                                             class="delete-alertbox">
                                             @csrf

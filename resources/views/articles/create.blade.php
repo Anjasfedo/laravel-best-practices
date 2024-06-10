@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-            {{ __('Create New Article') }}
+            {{ __(request()->route()->getName()) }}
         </h2>
     </x-slot>
 
@@ -17,11 +17,7 @@
 
                         <x-form-textarea name="body" label="Body"></x-form-textarea>
 
-                        <div class="mt-4">
-                            {{-- <x-form-label for="image" :value="__('Image')" /> --}}
-                            <x-form-input name="image" label="Image" type="file" />
-
-                        </div>
+                        <x-form-input name="image" label="Image" type="file" />
 
                         <div class="mt-4">
                             <x-form-submit>
