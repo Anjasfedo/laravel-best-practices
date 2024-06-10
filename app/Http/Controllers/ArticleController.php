@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Article;
 use App\Http\Requests\StoreArticleRequest;
 use App\Http\Requests\UpdateArticleRequest;
+use Illuminate\Support\Facades\Session;
 
 class ArticleController extends Controller
 {
@@ -37,7 +38,16 @@ class ArticleController extends Controller
      */
     public function store(StoreArticleRequest $request)
     {
-        //
+        $validated = $request->validated();
+
+        // If validation succeeds, continue with your logic
+        // For example, saving the article to the database
+        // $article = Article::create($validatedData);
+
+        // Flash a success message if the article was successfully saved
+        Session::flash('success', 'Article created successfully.');
+
+        return redirect()->route('articles.index');
     }
 
     /**

@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Auth;
 
 class UpdateArticleRequest extends FormRequest
 {
@@ -11,7 +12,11 @@ class UpdateArticleRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        // Get the article ID from the route parameters
+        $articleId = $this->route('article');
+
+        // Check if the authenticated user's ID matches the user_id of the article
+        return Auth::check() && $articleId && Auth::user()->id === $articleId->user_id;
     }
 
     /**
@@ -22,7 +27,9 @@ class UpdateArticleRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'title' => 'sometimes|max:255',
+            'description' => 'sometimes|max:255',
+            'body' => 'sometimes',
         ];
     }
 }
