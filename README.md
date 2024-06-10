@@ -77,3 +77,9 @@ The Laravel framework is open-sourced software licensed under the [MIT license](
 
 3. Make model with all (migration, seeder, factory, policy, resource controller, form request)
 `php artisan make:model [singular] -a`
+
+4. Component
+`php artisan make:component [singular kebab-case] --view `
+
+5. Run seer
+`php artisan db:seed --class=[CLASS]`

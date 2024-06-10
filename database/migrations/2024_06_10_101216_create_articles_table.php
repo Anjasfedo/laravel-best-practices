@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('title');
             $table->string('slug');
             $table->string('description');
-            $table->string('body');
+            $table->text('body');
             $table->timestamps();
 
             $table->index('slug');
