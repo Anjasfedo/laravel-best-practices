@@ -27,9 +27,11 @@ class ArticleController extends Controller
     {
         Gate::authorize('viewAny', Article::class);
 
+        $chartData = $this->article->getArticleCountsForChart();
+
         $articles = $this->article->all();
 
-        return view('articles.index', compact('articles'));
+        return view('articles.index', compact('articles', 'chartData'));
     }
 
     /**

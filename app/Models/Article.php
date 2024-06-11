@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 
 class Article extends Model
@@ -36,5 +37,18 @@ class Article extends Model
             return asset(Storage::url($this->image));
         }
         return null;
+    }
+
+    public static function getArticleCountsForChart(): array
+    {
+        $articleCounts = self::select(
+            DB::raw('DATE_FORMAT(created_at, "%Y-%m") as month'),
+            DB::raw('COUNT(*) as count')
+        )
+            ->groupBy('month')
+            ->orderBy('month')
+            ->get();
+
+        return $articleCounts->pluck('count', 'month')->toArray();
     }
 }

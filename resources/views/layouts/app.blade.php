@@ -14,6 +14,12 @@
 
     <!-- Scripts -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
+    
+    <!-- ChartKick -->
+    {{-- <script src="https://unpkg.com/chartkick@5.0.1/dist/chartkick.js"></script>
+    <script src="https://unpkg.com/chart.js@4.2.0/dist/chart.umd.js"></script>
+    <script src="https://unpkg.com/chartjs-adapter-date-fns@3.0.0/dist/chartjs-adapter-date-fns.bundle.js"></script> --}}
+    <script src="https://www.gstatic.com/charts/loader.js"></script>
 </head>
 
 <body class="font-sans antialiased">
@@ -34,6 +40,7 @@
             {{ $slot }}
         </main>
     </div>
+
     @if (Session::has('success') || Session::has('error'))
         <script>
             document.addEventListener('DOMContentLoaded', function() {
@@ -83,7 +90,7 @@
                             }
                         })
                         .catch(() => event
-                    .preventDefault()); // Prevent form submission if there is an error
+                            .preventDefault()); // Prevent form submission if there is an error
                 }
             });
         });

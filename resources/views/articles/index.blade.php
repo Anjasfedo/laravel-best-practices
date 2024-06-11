@@ -3,6 +3,12 @@
         <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
             {{ __(request()->route()->getName()) }}
         </h2>
+        <div id="chart"></div>
+
+        <script type="module">
+            new Chartkick.PieChart("chart", @json($chartData));
+        </script>
+
     </x-slot>
 
     <div class="py-12">
@@ -63,13 +69,13 @@
                                         @endif
                                     </td>
                                     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-400">
-                                        <x-nav-link :href="route('articles.edit', $article->id)">
+                                        <x-nav-link :href="route('articles.edit', $article)">
                                             Edit
                                         </x-nav-link>
-                                        <x-nav-link :href="route('articles.show', $article->id)">
+                                        <x-nav-link :href="route('articles.show', $article)">
                                             Show
                                         </x-nav-link>
-                                        <form action="{{ route('articles.destroy', $article->id) }}" method="POST"
+                                        <form action="{{ route('articles.destroy', $article) }}" method="POST"
                                             class="delete-alertbox">
                                             @csrf
                                             @method('DELETE')
